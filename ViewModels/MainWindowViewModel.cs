@@ -57,7 +57,7 @@ namespace Calc.ViewModels
         private void AddNumber(int value)
         {
             ShownString += value;
-            Calculate();
+            Calculate(ShownString);
         }
 
         private void AddOperator(Operator @operator)
@@ -89,7 +89,7 @@ namespace Calc.ViewModels
             {
                 ShownString += ")";
                 _numberOfClosingParentheses++;
-                Calculate();
+                Calculate(ShownString);
             }
         }
 
@@ -122,14 +122,14 @@ namespace Calc.ViewModels
                         break;
                 }
                 
-                Calculate();
+                Calculate(ShownString);
             }
         }
 
-        private void Calculate()
+        private void Calculate(string calc)
         {
             if (_numberOfOpeningParentheses == _numberOfClosingParentheses)
-                ShownResult = Calculator.Calculate(ShownString);
+                ShownResult = Calculator.Calculate(calc);
         }
         
         private bool CanDecimalSeparatorBePlaced()
@@ -167,9 +167,7 @@ namespace Calc.ViewModels
             }
             
             ShownString = ShownString[..^1];
-            ShownResult = IsLastInputAnOperation() ?
-                Calculator.Calculate(ShownString[..^1]) :
-                Calculator.Calculate(ShownString);
+            Calculate(IsLastInputAnOperation() ? ShownString[..^1] : ShownString);
         }
 
         private bool IsLastInputAnOperation()
