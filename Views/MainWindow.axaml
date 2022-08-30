@@ -24,25 +24,27 @@
         <Style Selector="Button">
             <Setter Property="Margin" Value="5" />
         </Style>
-        <Style Selector="TextBlock">
+        <Style Selector="Button TextBlock">
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+        <Style Selector="TextBlock.screen">
             <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="MinHeight" Value="35" />
+            <Setter Property="TextAlignment" Value="Right" />
         </Style>
     </Window.Styles>
 
     <Grid Margin="5" RowDefinitions="Auto, Auto, *">
         <!--  Screens  -->
         <TextBlock
-            FontSize="30"
+            Classes="screen"
             Grid.Row="0"
-            MinHeight="35"
-            Text="{Binding ShownString}"
-            TextAlignment="Right" />
+            Text="{Binding ShownString}" />
         <TextBlock
-            FontSize="30"
+            Classes="screen"
             Grid.Row="1"
-            MinHeight="35"
-            Text="{Binding ShownResult}"
-            TextAlignment="Right" />
+            Text="{Binding ShownResult}" />
         <!--  Keys  -->
         <Grid
             ColumnDefinitions="*,*,*,*,*"
