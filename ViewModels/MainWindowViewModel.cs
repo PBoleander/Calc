@@ -65,7 +65,7 @@ namespace Calc.ViewModels
             if (ShownString[^1].Equals('('))
                 return;
             
-            if (IsLastInputAnOperation())
+            if (IsLastInputAnOperator())
                 ShownString = ShownString[..^1];
 
             ShownString += @operator switch
@@ -80,7 +80,7 @@ namespace Calc.ViewModels
 
         private void AddParenthesis()
         {
-            if (ShownString.Length == 0 || IsLastInputAnOperation() || ShownString[^1].Equals('('))
+            if (ShownString.Length == 0 || IsLastInputAnOperator() || ShownString[^1].Equals('('))
             {
                 ShownString += "(";
                 _numberOfOpeningParentheses++;
@@ -172,21 +172,12 @@ namespace Calc.ViewModels
             }
             
             ShownString = ShownString[..^1];
-            Calculate(IsLastInputAnOperation() ? ShownString[..^1] : ShownString);
+            Calculate(IsLastInputAnOperator() ? ShownString[..^1] : ShownString);
         }
 
-        private bool IsLastInputAnOperation()
+        private bool IsLastInputAnOperator()
         {
-            switch (ShownString[^1])
-            {
-                case OperatorChar.Add:
-                case OperatorChar.Substract:
-                case OperatorChar.Multiply:
-                case OperatorChar.Divide:
-                    return true;
-                default:
-                    return false;
-            }
+            return OperatorChar.IsAnOperator(ShownString[^1]);
         }
         
         private static int MaxOf(int number1, int number2)
