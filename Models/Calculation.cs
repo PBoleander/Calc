@@ -6,24 +6,24 @@ public class Calculation
 {
     private readonly double _firstValue;
     private readonly double _secondValue;
-    private readonly Operation? _operation;
+    private readonly Operator? _operator;
 
-    public Calculation(double firstValue, double secondValue, Operation? operation)
+    public Calculation(double firstValue, double secondValue, Operator? @operator)
     {
         _firstValue = firstValue;
         _secondValue = secondValue;
-        _operation = operation;
+        _operator = @operator;
     }
 
     public double Calculate()
     {
-        return _operation switch
+        return _operator switch
         {
-            Operation.Add => _firstValue + _secondValue,
-            Operation.Substract => _firstValue - _secondValue,
-            Operation.Multiply => _firstValue * _secondValue,
-            Operation.Divide => _firstValue / _secondValue,
-            _ => throw new InvalidDataException("Operation not allowed")
+            Operator.Add => _firstValue + _secondValue,
+            Operator.Substract => _firstValue - _secondValue,
+            Operator.Multiply => _firstValue * _secondValue,
+            Operator.Divide => _firstValue / _secondValue,
+            _ => throw new InvalidDataException("Operator not allowed")
         };
     }
 }

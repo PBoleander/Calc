@@ -1,6 +1,6 @@
 namespace Calc.Models;
 
-public enum Operation
+public enum Operator
 {
     Add,
     Substract,

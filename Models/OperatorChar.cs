@@ -2,7 +2,7 @@ using System.Linq;
 
 namespace Calc.Models;
 
-public static class OperationChar
+public static class OperatorChar
 {
     public const char Add = '+';
     public const char Substract = '-';

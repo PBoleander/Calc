@@ -17,7 +17,7 @@ namespace Calc.ViewModels
         // Commands
         public ReactiveCommand<Unit, Unit> AddDecimalSeparatorCommand { get; }
         public ReactiveCommand<int, Unit> AddNumberCommand { get; }
-        public ReactiveCommand<Operation, Unit> AddOperationCommand { get; }
+        public ReactiveCommand<Operator, Unit> AddOperatorCommand { get; }
         public ReactiveCommand<Unit, Unit> AddParenthesisCommand { get; }
         public ReactiveCommand<Unit, Unit> AlternateNegativePositiveCommand { get; }
         public ReactiveCommand<Unit, Unit> ClearScreenCommand { get; }
@@ -28,7 +28,7 @@ namespace Calc.ViewModels
         {
             AddDecimalSeparatorCommand = ReactiveCommand.Create(AddDecimalSeparator);
             AddNumberCommand = ReactiveCommand.Create<int>(AddNumber);
-            AddOperationCommand = ReactiveCommand.Create<Operation>(AddOperation);
+            AddOperatorCommand = ReactiveCommand.Create<Operator>(AddOperator);
             AddParenthesisCommand = ReactiveCommand.Create(AddParenthesis);
             AlternateNegativePositiveCommand = ReactiveCommand.Create(AlternateNegativePositive);
             ClearScreenCommand = ReactiveCommand.Create(ClearScreen);
@@ -60,7 +60,7 @@ namespace Calc.ViewModels
             Calculate();
         }
 
-        private void AddOperation(Operation operation)
+        private void AddOperator(Operator @operator)
         {
             if (ShownString[^1].Equals('('))
                 return;
@@ -68,13 +68,13 @@ namespace Calc.ViewModels
             if (IsLastInputAnOperation())
                 ShownString = ShownString[..^1];
 
-            ShownString += operation switch
+            ShownString += @operator switch
             {
-                Operation.Add => OperationChar.Add,
-                Operation.Substract => OperationChar.Substract,
-                Operation.Multiply => OperationChar.Multiply,
-                Operation.Divide => OperationChar.Divide,
-                _ => throw new InvalidDataException("Operation not allowed")
+                Operator.Add => OperatorChar.Add,
+                Operator.Substract => OperatorChar.Substract,
+                Operator.Multiply => OperatorChar.Multiply,
+                Operator.Divide => OperatorChar.Divide,
+                _ => throw new InvalidDataException("Operator not allowed")
             };
         }
 
@@ -98,26 +98,26 @@ namespace Calc.ViewModels
             var indexWhereSetOrUnsetSign = SetIndexWhereToSetOrUnsetSign();
 
             if (ShownString.Length == 0)
-                ShownString += OperationChar.Substract;
+                ShownString += OperatorChar.Substract;
             else
             {
                 switch (ShownString[indexWhereSetOrUnsetSign])
                 {
-                    case OperationChar.Substract:
+                    case OperatorChar.Substract:
                         if (indexWhereSetOrUnsetSign == 0 ||
-                            OperationChar.IsAnOperator(ShownString[indexWhereSetOrUnsetSign - 1]))
+                            OperatorChar.IsAnOperator(ShownString[indexWhereSetOrUnsetSign - 1]))
                             
                             ShownString = ShownString.Remove(indexWhereSetOrUnsetSign, 1);
                         else
                             // Add -
                             ShownString = ShownString[..indexWhereSetOrUnsetSign] +
-                                          OperationChar.Substract +
+                                          OperatorChar.Substract +
                                           ShownString[indexWhereSetOrUnsetSign..];
                         break;
                     default:
                         // Add -
                         ShownString = ShownString[..indexWhereSetOrUnsetSign] +
-                                      OperationChar.Substract +
+                                      OperatorChar.Substract +
                                       ShownString[indexWhereSetOrUnsetSign..];
                         break;
                 }
@@ -137,7 +137,7 @@ namespace Calc.ViewModels
             var indexLastDecimalSeparator = ShownString.LastIndexOf(
                 CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator,
                 StringComparison.Ordinal);
-            var indexLastOperator = ShownString.LastIndexOfAny(OperationChar.Operators);
+            var indexLastOperator = ShownString.LastIndexOfAny(OperatorChar.Operators);
 
             if (indexLastDecimalSeparator == -1 && indexLastOperator == -1)
                 return true;
@@ -176,10 +176,10 @@ namespace Calc.ViewModels
         {
             switch (ShownString[^1])
             {
-                case OperationChar.Add:
-                case OperationChar.Substract:
-                case OperationChar.Multiply:
-                case OperationChar.Divide:
+                case OperatorChar.Add:
+                case OperatorChar.Substract:
+                case OperatorChar.Multiply:
+                case OperatorChar.Divide:
                     return true;
                 default:
                     return false;
@@ -199,10 +199,10 @@ namespace Calc.ViewModels
 
         private int SetIndexWhereToSetOrUnsetSign()
         {
-            char[] nonSubstractOperators = { OperationChar.Add, OperationChar.Multiply, OperationChar.Divide };
+            char[] nonSubstractOperators = { OperatorChar.Add, OperatorChar.Multiply, OperatorChar.Divide };
             
             var indexAfterLastNonSubstractOperator = ShownString.LastIndexOfAny(nonSubstractOperators) + 1;
-            var indexOfLastSubstractOperator = ShownString.LastIndexOf(OperationChar.Substract);
+            var indexOfLastSubstractOperator = ShownString.LastIndexOf(OperatorChar.Substract);
             var indexAfterLastParenthesis = ShownString.LastIndexOf('(') + 1;
             var indexLastOperator = MaxOf(indexAfterLastNonSubstractOperator, indexOfLastSubstractOperator);
 

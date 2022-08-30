@@ -163,38 +163,38 @@
                 <material:MaterialIcon Kind="DeleteForever" />
             </Button>
             <Button
-                Command="{Binding AddOperationCommand}"
+                Command="{Binding AddOperatorCommand}"
                 Grid.Column="3"
                 Grid.Row="1">
                 <Button.CommandParameter>
-                    <m:Operation>Multiply</m:Operation>
+                    <m:Operator>Multiply</m:Operator>
                 </Button.CommandParameter>
                 <material:MaterialIcon Kind="Multiply" />
             </Button>
             <Button
-                Command="{Binding AddOperationCommand}"
+                Command="{Binding AddOperatorCommand}"
                 Grid.Column="3"
                 Grid.Row="2">
                 <Button.CommandParameter>
-                    <m:Operation>Add</m:Operation>
+                    <m:Operator>Add</m:Operator>
                 </Button.CommandParameter>
                 <material:MaterialIcon Kind="Add" />
             </Button>
             <Button
-                Command="{Binding AddOperationCommand}"
+                Command="{Binding AddOperatorCommand}"
                 Grid.Column="4"
                 Grid.Row="1">
                 <Button.CommandParameter>
-                    <m:Operation>Divide</m:Operation>
+                    <m:Operator>Divide</m:Operator>
                 </Button.CommandParameter>
                 <material:MaterialIcon Kind="Divide" />
             </Button>
             <Button
-                Command="{Binding AddOperationCommand}"
+                Command="{Binding AddOperatorCommand}"
                 Grid.Column="4"
                 Grid.Row="2">
                 <Button.CommandParameter>
-                    <m:Operation>Substract</m:Operation>
+                    <m:Operator>Substract</m:Operator>
                 </Button.CommandParameter>
                 <material:MaterialIcon Kind="Minus" />
             </Button>

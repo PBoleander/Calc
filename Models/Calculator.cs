@@ -1,6 +1,5 @@
 using System;
 using System.Globalization;
-using System.Linq;
 
 namespace Calc.Models;
 
@@ -29,8 +28,8 @@ public static class Calculator
         int indexOfOperator;
         
         // Search calculations with precedence first. When there isn't more, continue with the others
-        while ((indexOfOperator = calc.IndexOfAny(OperationChar.PrecedentOperators, 1)) > 0 || // precedent operations first
-               (indexOfOperator = calc.IndexOfAny(OperationChar.NonPrecedentOperators, 1)) > 0)
+        while ((indexOfOperator = calc.IndexOfAny(OperatorChar.PrecedentOperators, 1)) > 0 || // precedent operations first
+               (indexOfOperator = calc.IndexOfAny(OperatorChar.NonPrecedentOperators, 1)) > 0)
         {
             // ==== Find the first operand ==== //
             var indexOfPreviousOperator = SetIndexOfPreviousOperator(calc, indexOfOperator);
@@ -39,7 +38,7 @@ public static class Calculator
 
             // First value could be just the sign -, e.g. in --3
             if (stringOfFirstValue.Length == 1 &&
-                OperationChar.IsAnOperator(stringOfFirstValue[0]))
+                OperatorChar.IsAnOperator(stringOfFirstValue[0]))
             {
                 stringOfFirstValue = "0";
                 indexOfOperator--; // This way operator would be - and secondValue -3
@@ -47,7 +46,7 @@ public static class Calculator
             
             // ==== Find the second operand ==== //
             // startIndex = indexOfOperator + 2 avoids to detect sign of second value as operator
-            var indexOfNextOperator = calc.IndexOfAny(OperationChar.Operators, indexOfOperator + 2);
+            var indexOfNextOperator = calc.IndexOfAny(OperatorChar.Operators, indexOfOperator + 2);
 
             if (indexOfNextOperator == -1) // Last calculation
                 indexOfNextOperator = calc.Length;
@@ -57,10 +56,10 @@ public static class Calculator
 
             // ==== Construct the calculation ==== //
             var firstValue = Convert.ToDouble(stringOfFirstValue);
-            var operation = CharToOperation(calc[indexOfOperator]);
+            var @operator = CharToOperator(calc[indexOfOperator]);
             var secondValue = Convert.ToDouble(stringOfSecondValue);
 
-            var calculation = new Calculation(firstValue, secondValue, operation);
+            var calculation = new Calculation(firstValue, secondValue, @operator);
             
             // Replace calculation with its result
             calc = calc[..startIndexOfCalculation] +
@@ -71,14 +70,14 @@ public static class Calculator
         return calc;
     }
 
-    private static Operation? CharToOperation(char? character)
+    private static Operator? CharToOperator(char? character)
     {
         return character switch
         {
-            OperationChar.Add => Operation.Add,
-            OperationChar.Substract => Operation.Substract,
-            OperationChar.Multiply => Operation.Multiply,
-            OperationChar.Divide => Operation.Divide,
+            OperatorChar.Add => Operator.Add,
+            OperatorChar.Substract => Operator.Substract,
+            OperatorChar.Multiply => Operator.Multiply,
+            OperatorChar.Divide => Operator.Divide,
             _ => null
         };
     }
@@ -96,7 +95,7 @@ public static class Calculator
 
     private static int SetIndexOfPreviousOperator(string calc, int indexOfOperator)
     {
-        var indexOfPreviousOperator = calc.LastIndexOfAny(OperationChar.Operators, indexOfOperator - 1);
+        var indexOfPreviousOperator = calc.LastIndexOfAny(OperatorChar.Operators, indexOfOperator - 1);
         
         // First calculation. There could not be an operator at the beginning, it must be a sign
         if (indexOfPreviousOperator == 0)
@@ -106,8 +105,8 @@ public static class Calculator
         // If the first value is negative and not the first calculation, an operator must be just before the index
         // previously calculated as the indexOfPreviousOperator, e.g. in a+-b/c the - isn't previousOperator, it's +
         else if (indexOfPreviousOperator > 0 &&
-                 calc[indexOfPreviousOperator].Equals(OperationChar.Substract) && // minus sign
-                 OperationChar.IsAnOperator(calc[indexOfPreviousOperator - 1])) // previous index contains an operator
+                 calc[indexOfPreviousOperator].Equals(OperatorChar.Substract) && // minus sign
+                 OperatorChar.IsAnOperator(calc[indexOfPreviousOperator - 1])) // previous index contains an operator
         {
             indexOfPreviousOperator--;
         }
