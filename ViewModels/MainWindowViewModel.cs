@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Reactive;
 using Calc.Models;
 using ReactiveUI;
@@ -106,7 +105,7 @@ namespace Calc.ViewModels
                 {
                     case OperationChar.Substract:
                         if (indexWhereSetOrUnsetSign == 0 ||
-                            OperationChar.Operators.Contains(ShownString[indexWhereSetOrUnsetSign - 1]))
+                            OperationChar.IsAnOperator(ShownString[indexWhereSetOrUnsetSign - 1]))
                             
                             ShownString = ShownString.Remove(indexWhereSetOrUnsetSign, 1);
                         else

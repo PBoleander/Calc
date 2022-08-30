@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Calc.Models;
 
 public static class OperationChar
@@ -10,4 +12,9 @@ public static class OperationChar
     public static readonly char[] Operators = { Add, Substract, Multiply, Divide };
     public static readonly char[] PrecedentOperators = { Multiply, Divide };
     public static readonly char[] NonPrecedentOperators = { Add, Substract };
+
+    public static bool IsAnOperator(char character)
+    {
+        return Operators.Contains(character);
+    }
 }

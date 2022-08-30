@@ -39,7 +39,7 @@ public static class Calculator
 
             // First value could be just the sign -, e.g. in --3
             if (stringOfFirstValue.Length == 1 &&
-                OperationChar.Operators.Contains(stringOfFirstValue[0]))
+                OperationChar.IsAnOperator(stringOfFirstValue[0]))
             {
                 stringOfFirstValue = "0";
                 indexOfOperator--; // This way operator would be - and secondValue -3
@@ -104,10 +104,10 @@ public static class Calculator
             indexOfPreviousOperator = -1;
         }
         // If the first value is negative and not the first calculation, an operator must be just before the index
-        // previously calculated as the indexOfPreviousOperator
+        // previously calculated as the indexOfPreviousOperator, e.g. in a+-b/c the - isn't previousOperator, it's +
         else if (indexOfPreviousOperator > 0 &&
                  calc[indexOfPreviousOperator].Equals(OperationChar.Substract) && // minus sign
-                 OperationChar.Operators.Contains(calc[indexOfPreviousOperator - 1])) // previous index contains an operator
+                 OperationChar.IsAnOperator(calc[indexOfPreviousOperator - 1])) // previous index contains an operator
         {
             indexOfPreviousOperator--;
         }
