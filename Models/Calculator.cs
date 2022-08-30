@@ -12,7 +12,7 @@ public static class Calculator
         var numberOfClosingParentheses = CountIn(calc, ')');
         
         if (numberOfOpeningParentheses != numberOfClosingParentheses)
-            return string.Empty;
+            return "Waiting until all parentheses are closed";
         
         int indexOfOpeningParenthesis;
         while ((indexOfOpeningParenthesis = calc.LastIndexOf("(", StringComparison.Ordinal)) != -1)

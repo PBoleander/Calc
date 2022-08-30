@@ -128,8 +128,7 @@ namespace Calc.ViewModels
 
         private void Calculate(string calc)
         {
-            if (_numberOfOpeningParentheses == _numberOfClosingParentheses)
-                ShownResult = Calculator.Calculate(calc);
+            ShownResult = Calculator.Calculate(calc);
         }
         
         private bool CanDecimalSeparatorBePlaced()
@@ -155,6 +154,12 @@ namespace Calc.ViewModels
 
         private void DeleteLast()
         {
+            if (ShownString.Length == 1)
+            {
+                ClearScreen();
+                return;
+            }
+
             // Update number of parentheses
             switch (ShownString[^1])
             {
