@@ -95,7 +95,7 @@ namespace Calc.ViewModels
 
         private void AlternateNegativePositive()
         {
-            var indexWhereSetOrUnsetSign = SetIndexWhereSetSign();
+            var indexWhereSetOrUnsetSign = SetIndexWhereToSetOrUnsetSign();
 
             if (ShownString.Length == 0)
                 ShownString += OperationChar.Substract;
@@ -197,7 +197,7 @@ namespace Calc.ViewModels
             ShownResult = string.Empty;
         }
 
-        private int SetIndexWhereSetSign()
+        private int SetIndexWhereToSetOrUnsetSign()
         {
             char[] nonSubstractOperators = { OperationChar.Add, OperationChar.Multiply, OperationChar.Divide };
             
