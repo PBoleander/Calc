@@ -8,6 +8,24 @@ public sealed class MyStringBuilder
     private readonly StringBuilder _stringBuilder = new();
 
     public int Length => _stringBuilder.Length;
+    
+    public char this[int index] => _stringBuilder[index];
+
+    public char this[Index index] => _stringBuilder[index];
+
+    public string this[Range range] {
+        get
+        {
+            var chain = new MyStringBuilder();
+            
+            for (var i = range.Start.Value; i < range.End.Value; i++)
+            {
+                chain.Append(this[i]);
+            }
+
+            return chain.ToString();
+        }
+    }
 
     public MyStringBuilder(){}
     
@@ -33,24 +51,6 @@ public sealed class MyStringBuilder
         _stringBuilder.Clear();
 
         return this;
-    }
-
-    public char this[int index] => _stringBuilder[index];
-
-    public char this[Index index] => _stringBuilder[index];
-
-    public string this[Range range] {
-        get
-        {
-            var chain = new MyStringBuilder();
-            
-            for (var i = range.Start.Value; i < range.End.Value; i++)
-            {
-                chain.Append(this[i]);
-            }
-
-            return chain.ToString();
-        }
     }
 
     public int Count(char character)
