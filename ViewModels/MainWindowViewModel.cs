@@ -105,8 +105,8 @@ namespace Calc.ViewModels
                 {
                     case OperatorChar.Substract:
                         if (indexWhereSetOrUnsetSign == 0 ||
-                            OperatorChar.IsAnOperator(ShownString[indexWhereSetOrUnsetSign - 1]) ||
-                            ShownString[indexWhereSetOrUnsetSign - 1].Equals('('))
+                            ShownString[indexWhereSetOrUnsetSign - 1].Equals('(') ||
+                            OperatorChar.IsAnOperator(ShownString[indexWhereSetOrUnsetSign - 1]))
                             
                             ShownString = ShownString.Remove(indexWhereSetOrUnsetSign, 1);
                         else
