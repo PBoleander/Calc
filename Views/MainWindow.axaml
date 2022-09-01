@@ -28,6 +28,7 @@
             <Setter Property="FontSize" Value="20" />
         </Style>
         <Style Selector="TextBlock.screen">
+            <Setter Property="Background" Value="#2f2a2c" />
             <Setter Property="Margin" Value="5" />
             <Setter Property="FontSize" Value="30" />
             <Setter Property="MinHeight" Value="35" />
@@ -50,6 +51,16 @@
             ColumnDefinitions="*,*,*,*,*"
             Grid.Row="2"
             RowDefinitions="*,*,*,*">
+            <!--  Numeric keys  -->
+            <Button
+                Command="{Binding AddNumberCommand}"
+                Grid.Column="0"
+                Grid.Row="3">
+                <Button.CommandParameter>
+                    <system:Int32>0</system:Int32>
+                </Button.CommandParameter>
+                0
+            </Button>
             <Button
                 Command="{Binding AddNumberCommand}"
                 Grid.Column="0"
@@ -131,15 +142,7 @@
                 </Button.CommandParameter>
                 9
             </Button>
-            <Button
-                Command="{Binding AddNumberCommand}"
-                Grid.Column="0"
-                Grid.Row="3">
-                <Button.CommandParameter>
-                    <system:Int32>0</system:Int32>
-                </Button.CommandParameter>
-                0
-            </Button>
+            <!--  Non-numeric keys  -->
             <Button
                 Command="{Binding AddDecimalSeparatorCommand}"
                 Grid.Column="1"
@@ -175,21 +178,21 @@
             </Button>
             <Button
                 Command="{Binding AddOperatorCommand}"
+                Grid.Column="4"
+                Grid.Row="1">
+                <Button.CommandParameter>
+                    <m:Operator>Divide</m:Operator>
+                </Button.CommandParameter>
+                <material:MaterialIcon Kind="Division" />
+            </Button>
+            <Button
+                Command="{Binding AddOperatorCommand}"
                 Grid.Column="3"
                 Grid.Row="2">
                 <Button.CommandParameter>
                     <m:Operator>Add</m:Operator>
                 </Button.CommandParameter>
                 <material:MaterialIcon Kind="Add" />
-            </Button>
-            <Button
-                Command="{Binding AddOperatorCommand}"
-                Grid.Column="4"
-                Grid.Row="1">
-                <Button.CommandParameter>
-                    <m:Operator>Divide</m:Operator>
-                </Button.CommandParameter>
-                <material:MaterialIcon Kind="Divide" />
             </Button>
             <Button
                 Command="{Binding AddOperatorCommand}"
