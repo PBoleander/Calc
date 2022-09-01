@@ -9,27 +9,36 @@ public static class Calculator
     {
         var calculus = new MyStringBuilder(str);
 
-        // ========== Manage parentheses ========== //
         var numberOfOpeningParentheses = calculus.Count('(');
         var numberOfClosingParentheses = calculus.Count(')');
         
         if (numberOfOpeningParentheses != numberOfClosingParentheses)
             return "Waiting until all parentheses are closed";
         
-        int indexOfOpeningParenthesis;
-        while ((indexOfOpeningParenthesis = calculus.LastIndexOf('(')) != -1)
+        CalculateParentheses(ref calculus);
+        CalculateNonParentheses(ref calculus);
+
+        return calculus.ToString();
+    }
+
+    private static Operator? CharToOperator(char? character)
+    {
+        return character switch
         {
-            var indexOfClosingParenthesis = calculus.IndexOf(')', indexOfOpeningParenthesis);
-            // Replace parentheses with its result
-            calculus.Replace(indexOfOpeningParenthesis, indexOfClosingParenthesis + 1,
-                Calculate(calculus[(indexOfOpeningParenthesis + 1)..indexOfClosingParenthesis]));
-        }
-        
-        // ========== Manage other operations ========== //
+            OperatorChar.Add => Operator.Add,
+            OperatorChar.Substract => Operator.Substract,
+            OperatorChar.Multiply => Operator.Multiply,
+            OperatorChar.Divide => Operator.Divide,
+            _ => null
+        };
+    }
+
+    private static void CalculateNonParentheses(ref MyStringBuilder calculus)
+    {
         int indexOfOperator;
         
         // Search calculations with precedence first. When there isn't more, continue with the others
-        while ((indexOfOperator = calculus.IndexOfAny(OperatorChar.PrecedentOperators, 1)) > 0 || // precedent operations first
+        while ((indexOfOperator = calculus.IndexOfAny(OperatorChar.PrecedentOperators, 1)) > 0 ||
                (indexOfOperator = calculus.IndexOfAny(OperatorChar.NonPrecedentOperators, 1)) > 0)
         {
             // ==== Find the first operand ==== //
@@ -66,20 +75,18 @@ public static class Calculator
             calculus.Replace(startIndexOfCalculation, nextIndexAfterCalculation,
                 Convert.ToString(calculation.Calculate(), CultureInfo.CurrentCulture));
         }
-
-        return calculus.ToString();
     }
 
-    private static Operator? CharToOperator(char? character)
+    private static void CalculateParentheses(ref MyStringBuilder calculus)
     {
-        return character switch
+        int indexOfOpeningParenthesis;
+        while ((indexOfOpeningParenthesis = calculus.LastIndexOf('(')) != -1)
         {
-            OperatorChar.Add => Operator.Add,
-            OperatorChar.Substract => Operator.Substract,
-            OperatorChar.Multiply => Operator.Multiply,
-            OperatorChar.Divide => Operator.Divide,
-            _ => null
-        };
+            var indexOfClosingParenthesis = calculus.IndexOf(')', indexOfOpeningParenthesis);
+            // Replace parentheses with its result
+            calculus.Replace(indexOfOpeningParenthesis, indexOfClosingParenthesis + 1,
+                Calculate(calculus[(indexOfOpeningParenthesis + 1)..indexOfClosingParenthesis]));
+        }
     }
 
     private static int SetIndexOfPreviousOperator(MyStringBuilder calculus, int indexOfOperator)
