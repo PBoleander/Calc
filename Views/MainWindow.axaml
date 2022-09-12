@@ -37,7 +37,7 @@
     </Window.Styles>
 
     <Window.KeyBindings>
-        <!-- 0 -->
+        <!--  0  -->
         <KeyBinding Command="{Binding AddNumberCommand}" Gesture="D0">
             <KeyBinding.CommandParameter>
                 <system:Int32>0</system:Int32>
@@ -48,7 +48,7 @@
                 <system:Int32>0</system:Int32>
             </KeyBinding.CommandParameter>
         </KeyBinding>
-        <!-- 1 -->
+        <!--  1  -->
         <KeyBinding Command="{Binding AddNumberCommand}" Gesture="D1">
             <KeyBinding.CommandParameter>
                 <system:Int32>1</system:Int32>
@@ -59,7 +59,7 @@
                 <system:Int32>1</system:Int32>
             </KeyBinding.CommandParameter>
         </KeyBinding>
-        <!-- 2 -->
+        <!--  2  -->
         <KeyBinding Command="{Binding AddNumberCommand}" Gesture="D2">
             <KeyBinding.CommandParameter>
                 <system:Int32>2</system:Int32>
@@ -70,7 +70,7 @@
                 <system:Int32>2</system:Int32>
             </KeyBinding.CommandParameter>
         </KeyBinding>
-        <!-- 3 -->
+        <!--  3  -->
         <KeyBinding Command="{Binding AddNumberCommand}" Gesture="D3">
             <KeyBinding.CommandParameter>
                 <system:Int32>3</system:Int32>
@@ -81,7 +81,7 @@
                 <system:Int32>3</system:Int32>
             </KeyBinding.CommandParameter>
         </KeyBinding>
-        <!-- 4 -->
+        <!--  4  -->
         <KeyBinding Command="{Binding AddNumberCommand}" Gesture="D4">
             <KeyBinding.CommandParameter>
                 <system:Int32>4</system:Int32>
@@ -92,7 +92,7 @@
                 <system:Int32>4</system:Int32>
             </KeyBinding.CommandParameter>
         </KeyBinding>
-        <!-- 5 -->
+        <!--  5  -->
         <KeyBinding Command="{Binding AddNumberCommand}" Gesture="D5">
             <KeyBinding.CommandParameter>
                 <system:Int32>5</system:Int32>
@@ -103,7 +103,7 @@
                 <system:Int32>5</system:Int32>
             </KeyBinding.CommandParameter>
         </KeyBinding>
-        <!-- 6 -->
+        <!--  6  -->
         <KeyBinding Command="{Binding AddNumberCommand}" Gesture="D6">
             <KeyBinding.CommandParameter>
                 <system:Int32>6</system:Int32>
@@ -114,7 +114,7 @@
                 <system:Int32>6</system:Int32>
             </KeyBinding.CommandParameter>
         </KeyBinding>
-        <!-- 7 -->
+        <!--  7  -->
         <KeyBinding Command="{Binding AddNumberCommand}" Gesture="D7">
             <KeyBinding.CommandParameter>
                 <system:Int32>7</system:Int32>
@@ -125,7 +125,7 @@
                 <system:Int32>7</system:Int32>
             </KeyBinding.CommandParameter>
         </KeyBinding>
-        <!-- 8 -->
+        <!--  8  -->
         <KeyBinding Command="{Binding AddNumberCommand}" Gesture="D8">
             <KeyBinding.CommandParameter>
                 <system:Int32>8</system:Int32>
@@ -136,7 +136,7 @@
                 <system:Int32>8</system:Int32>
             </KeyBinding.CommandParameter>
         </KeyBinding>
-        <!-- 9 -->
+        <!--  9  -->
         <KeyBinding Command="{Binding AddNumberCommand}" Gesture="D9">
             <KeyBinding.CommandParameter>
                 <system:Int32>9</system:Int32>
@@ -147,7 +147,7 @@
                 <system:Int32>9</system:Int32>
             </KeyBinding.CommandParameter>
         </KeyBinding>
-        <!-- + -->
+        <!--  +  -->
         <KeyBinding Command="{Binding AddOperatorCommand}" Gesture="Add">
             <KeyBinding.CommandParameter>
                 <m:Operator>Add</m:Operator>
@@ -158,34 +158,34 @@
                 <m:Operator>Add</m:Operator>
             </KeyBinding.CommandParameter>
         </KeyBinding>
-        <!-- - -->
+        <!--  -  -->
         <KeyBinding Command="{Binding AddOperatorCommand}" Gesture="Subtract">
             <KeyBinding.CommandParameter>
-                <m:Operator>Substract</m:Operator>
+                <m:Operator>Subtract</m:Operator>
             </KeyBinding.CommandParameter>
         </KeyBinding>
         <KeyBinding Command="{Binding AddOperatorCommand}" Gesture="OemMinus">
             <KeyBinding.CommandParameter>
-                <m:Operator>Substract</m:Operator>
+                <m:Operator>Subtract</m:Operator>
             </KeyBinding.CommandParameter>
         </KeyBinding>
-        <!-- . -->
-        <KeyBinding Command="{Binding AddDecimalSeparatorCommand}" Gesture="OemPeriod"/>
-        <!-- +- -->
+        <!--  .  -->
+        <KeyBinding Command="{Binding AddDecimalSeparatorCommand}" Gesture="OemPeriod" />
+        <!--  +-  -->
         <KeyBinding Command="{Binding AlternateNegativePositiveCommand}" Gesture="Alt+Subtract" />
         <KeyBinding Command="{Binding AlternateNegativePositiveCommand}" Gesture="Alt+OemMinus" />
-        <!-- Backspace -->
-        <KeyBinding Command="{Binding DeleteLastCommand}" Gesture="Back"/>
-        <!-- Delete -->
-        <KeyBinding Command="{Binding ClearScreenCommand}" Gesture="Escape"/>
-        <KeyBinding Command="{Binding ClearScreenCommand}" Gesture="Delete"/>
-        <!-- * -->
+        <!--  Backspace  -->
+        <KeyBinding Command="{Binding DeleteLastCommand}" Gesture="Back" />
+        <!--  Delete  -->
+        <KeyBinding Command="{Binding ClearScreenCommand}" Gesture="Escape" />
+        <KeyBinding Command="{Binding ClearScreenCommand}" Gesture="Delete" />
+        <!--  *  -->
         <KeyBinding Command="{Binding AddOperatorCommand}" Gesture="Multiply">
             <KeyBinding.CommandParameter>
                 <m:Operator>Multiply</m:Operator>
             </KeyBinding.CommandParameter>
         </KeyBinding>
-        <!-- / -->
+        <!--  /  -->
         <KeyBinding Command="{Binding AddOperatorCommand}" Gesture="Divide">
             <KeyBinding.CommandParameter>
                 <m:Operator>Divide</m:Operator>
@@ -196,13 +196,13 @@
                 <m:Operator>Divide</m:Operator>
             </KeyBinding.CommandParameter>
         </KeyBinding>
-        <!-- () -->
+        <!--  ()  -->
         <KeyBinding Command="{Binding AddParenthesisCommand}" Gesture="OemOpenBrackets" />
         <KeyBinding Command="{Binding AddParenthesisCommand}" Gesture="OemCloseBrackets" />
-        <!-- = -->
+        <!--  =  -->
         <KeyBinding Command="{Binding PickResultCommand}" Gesture="Enter" />
     </Window.KeyBindings>
- 
+
     <Grid Margin="5" RowDefinitions="Auto, Auto, *">
         <!--  Screens  -->
         <TextBlock
@@ -366,7 +366,7 @@
                 Grid.Column="4"
                 Grid.Row="2">
                 <Button.CommandParameter>
-                    <m:Operator>Substract</m:Operator>
+                    <m:Operator>Subtract</m:Operator>
                 </Button.CommandParameter>
                 <material:MaterialIcon Kind="Minus" />
             </Button>

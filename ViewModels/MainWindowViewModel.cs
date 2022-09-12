@@ -71,7 +71,7 @@ namespace Calc.ViewModels
             ShownString += @operator switch
             {
                 Operator.Add => OperatorChar.Add,
-                Operator.Substract => OperatorChar.Substract,
+                Operator.Subtract => OperatorChar.Subtract,
                 Operator.Multiply => OperatorChar.Multiply,
                 Operator.Divide => OperatorChar.Divide,
                 _ => throw new InvalidDataException("Operator not allowed")
@@ -98,12 +98,12 @@ namespace Calc.ViewModels
             var indexWhereSetOrUnsetSign = SetIndexWhereToSetOrUnsetSign();
 
             if (ShownString.Length == 0 || ShownString[^1].Equals('('))
-                ShownString += OperatorChar.Substract;
+                ShownString += OperatorChar.Subtract;
             else
             {
                 switch (ShownString[indexWhereSetOrUnsetSign])
                 {
-                    case OperatorChar.Substract:
+                    case OperatorChar.Subtract:
                         if (indexWhereSetOrUnsetSign == 0 ||
                             ShownString[indexWhereSetOrUnsetSign - 1].Equals('(') ||
                             OperatorChar.IsAnOperator(ShownString[indexWhereSetOrUnsetSign - 1]))
@@ -112,13 +112,13 @@ namespace Calc.ViewModels
                         else
                             // Add -
                             ShownString = ShownString[..indexWhereSetOrUnsetSign] +
-                                          OperatorChar.Substract +
+                                          OperatorChar.Subtract +
                                           ShownString[indexWhereSetOrUnsetSign..];
                         break;
                     default:
                         // Add -
                         ShownString = ShownString[..indexWhereSetOrUnsetSign] +
-                                      OperatorChar.Substract +
+                                      OperatorChar.Subtract +
                                       ShownString[indexWhereSetOrUnsetSign..];
                         break;
                 }
@@ -197,7 +197,7 @@ namespace Calc.ViewModels
             char[] nonSubstractOperators = { OperatorChar.Add, OperatorChar.Multiply, OperatorChar.Divide };
             
             var indexAfterLastNonSubstractOperator = ShownString.LastIndexOfAny(nonSubstractOperators) + 1;
-            var indexOfLastSubstractOperator = ShownString.LastIndexOf(OperatorChar.Substract);
+            var indexOfLastSubstractOperator = ShownString.LastIndexOf(OperatorChar.Subtract);
             var indexAfterLastParenthesis = ShownString.LastIndexOf('(') + 1;
             var indexLastOperator = MaxOf(indexAfterLastNonSubstractOperator, indexOfLastSubstractOperator);
 

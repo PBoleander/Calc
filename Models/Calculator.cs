@@ -26,7 +26,7 @@ public static class Calculator
         return character switch
         {
             OperatorChar.Add => Operator.Add,
-            OperatorChar.Substract => Operator.Substract,
+            OperatorChar.Subtract => Operator.Subtract,
             OperatorChar.Multiply => Operator.Multiply,
             OperatorChar.Divide => Operator.Divide,
             _ => null
@@ -101,7 +101,7 @@ public static class Calculator
         // If the first value is negative and not the first calculation, an operator must be just before the index
         // previously calculated as the indexOfPreviousOperator, e.g. in a+-b/c the - isn't previousOperator, it's +
         else if (indexOfPreviousOperator > 0 &&
-                 calculus[indexOfPreviousOperator].Equals(OperatorChar.Substract) && // minus sign
+                 calculus[indexOfPreviousOperator].Equals(OperatorChar.Subtract) && // minus sign
                  OperatorChar.IsAnOperator(calculus[indexOfPreviousOperator - 1])) // previous index contains an operator
         {
             indexOfPreviousOperator--;

@@ -20,7 +20,7 @@ public class Calculation
         return _operator switch
         {
             Operator.Add => _firstValue + _secondValue,
-            Operator.Substract => _firstValue - _secondValue,
+            Operator.Subtract => _firstValue - _secondValue,
             Operator.Multiply => _firstValue * _secondValue,
             Operator.Divide => _firstValue / _secondValue,
             _ => throw new InvalidDataException("Operator not allowed")
